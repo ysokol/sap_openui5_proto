@@ -18,7 +18,7 @@
             <Toolbar>
                 <Title
                     id="tableHeader"
-                    text="Units Of Measures"/>
+                    text="Units Of Measures 123"/>
                 <Button id="addButton" text="Add" press="onBtnAddRow"/>
                 <Button id="cpyButton" text="Copy" press="onBtnCpyRow"/>
                 <Button id="savButton" text="Save" press="onBtnSave"/>
