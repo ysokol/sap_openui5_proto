@@ -106,6 +106,7 @@ public class MyJPAProcessorImpl {
         }
     }
 
+    
     private void applyEntitySetSelectFilter(final UriInfo uriInfo) throws ODataException {
         // check request details
         UriInfoImpl uriInfoWithFilter;
