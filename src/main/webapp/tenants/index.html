@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta charset="utf-8">
+      <title>Tenants Maintenance</title>
+      <script
+         id="sap-ui-bootstrap"
+         src="http://localhost:8080/OpenUI5/resources/sap-ui-core.js"
+         data-sap-ui-theme="sap_bluecrystal"
+         data-sap-ui-libs="sap.m"
+         data-sap-ui-bindingSyntax="complex"
+         data-sap-ui-compatVersion="edge"
+         data-sap-ui-preload="async"
+         data-sap-ui-resourceroots='{
+            "ys.first.app": "./"
+         }' >
+      </script>
+      <!-- src="http://localhost/OpenUI5/resources/sap-ui-core-dbg.js" -->
+      <!-- src="https://sapui5.hana.ondemand.com/sdk/resources/sap-ui-core-dbg.js" -->
+      <script>
+         sap.ui.getCore().attachInit(function () {
+            new sap.ui.core.ComponentContainer({
+               name : "ys.first.app"
+            }).placeAt("content");
+
+         });
+      </script>
+   </head>
+   <body class="sapUiBody" id="content">
+   </body>
+</html>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
+    <!--TEST SERVLET-->
+    <servlet>
+        <servlet-name>TestServlet</servlet-name>
+        <servlet-class>TestServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>TestServlet</servlet-name>
+        <url-pattern>/TestServlet</url-pattern>
+    </servlet-mapping>
+    <!--ODATA V4-->
+    <servlet>
+        <servlet-name>maintenance</servlet-name>
+        <servlet-class>odatav4.OlingoServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>maintenance</servlet-name>
+        <url-pattern>/maintenance.svc/*</url-pattern>
+    </servlet-mapping>
+    <!--ODATA V2-->
+    <servlet>
+        <servlet-name>MyODataSampleServlet</servlet-name>
+        <servlet-class>org.apache.cxf.jaxrs.servlet.CXFNonSpringJaxrsServlet</servlet-class>
+        <init-param>
+            <param-name>javax.ws.rs.Application</param-name>
+            <param-value>org.apache.olingo.odata2.core.rest.app.ODataApplication</param-value>
+        </init-param>
+        <init-param>
+            <param-name>org.apache.olingo.odata2.service.factory</param-name>
+            <param-value>odatav2.MyServiceFactory</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MyODataSampleServlet</servlet-name>
+        <url-pattern>/maintenancev2_without_jpa.svc/*</url-pattern>
+    </servlet-mapping>
+    <!--ODATA V2 with JPA-->
+    <servlet>
+        <servlet-name>JPARefScenarioServlet</servlet-name> 
+        <servlet-class>org.apache.cxf.jaxrs.servlet.CXFNonSpringJaxrsServlet</servlet-class> 
+        <init-param>
+            <param-name>javax.ws.rs.Application</param-name> 
+            <param-value>org.apache.olingo.odata2.core.rest.app.ODataApplication</param-value> 
+        </init-param>
+        <init-param>
+            <param-name>org.apache.olingo.odata2.service.factory</param-name> 
+            <param-value>odatav2.jpa.MyODataJPAServiceFactory</param-value> 
+        </init-param>
+        <load-on-startup>1</load-on-startup> 
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>JPARefScenarioServlet</servlet-name> 
+        <url-pattern>/maintenancev2.svc/*</url-pattern> 
+    </servlet-mapping>
+</web-app>

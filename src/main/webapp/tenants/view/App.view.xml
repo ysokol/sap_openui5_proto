@@ -1,0 +1,45 @@
+<mvc:View
+    controllerName="ys.first.app.controller.App"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:semantic="sap.m.semantic"
+    xmlns="sap.m">
+    <Table
+        id="tenantsTable"
+        inset="false"
+        items="{path: '/Tenants'}"
+        mode="SingleSelectMaster"
+        width="auto"
+        growing="true">
+        
+        <headerToolbar>
+            <Toolbar>
+                <Title
+                    id="tableHeader"
+                    text="Tenants"/>
+                <Button id="addButton" text="Add" press="onBtnAddRow"/>
+                <Button id="cpyButton" text="Copy" press="onBtnCpyRow"/>
+                <Button id="savButton" text="Save" press="onBtnSave"/>
+                <Button id="delButton" text="Delete" press="onBtnDelRow"/>
+            </Toolbar>
+        </headerToolbar>
+              
+        <columns>
+            <Column width = "10em">
+                <Text text="TenantId" />
+            </Column>
+            <Column>
+                <Text text="Description" />
+            </Column>
+        </columns>
+        
+        <items>
+            <ColumnListItem vAlign="Middle">
+                <cells>
+                    <Label text="{TenantId}" /> 
+                    <Input value="{Description}" liveChange="onDescrLiveChange" maxLength="20" />
+                </cells>
+            </ColumnListItem>
+        </items>
+        
+    </Table>
+</mvc:View>
