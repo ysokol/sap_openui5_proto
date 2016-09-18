@@ -1,0 +1,16 @@
+<mvc:View xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" controllerName="ys.first.app.controller.Root" displayBlock="true">
+	<App class="sapUiDemoWT">
+		<pages>
+			<Page title="MyApplication">
+			<content>
+			    <sap.ui.layout:VerticalLayout width="100%" xmlns:sap.ui.layout="sap.ui.layout" id="__layout0">
+			    	<mvc:XMLView viewName="ys.first.app.view.Client"/>
+			    </sap.ui.layout:VerticalLayout>	
+			    <sap.ui.layout:VerticalLayout width="100%" xmlns:sap.ui.layout="sap.ui.layout" id="__layout1">
+			    	<mvc:XMLView viewName="ys.first.app.view.App"/>
+			    </sap.ui.layout:VerticalLayout>	
+			</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

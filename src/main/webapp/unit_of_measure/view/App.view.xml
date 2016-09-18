@@ -1,66 +1,47 @@
-<mvc:View
-    controllerName="ys.first.app.controller.App"
-    xmlns:mvc="sap.ui.core.mvc"
-    xmlns:core="sap.ui.core"
-    xmlns:semantic="sap.m.semantic"
-    xmlns="sap.m">
-    <!--, parameters: {expand: 'UomDimensionDetails'}  ,  
+<mvc:View controllerName="ys.first.app.controller.App" xmlns:mvc="sap.ui.core.mvc" xmlns:core="sap.ui.core" xmlns:semantic="sap.m.semantic"
+	xmlns="sap.m">
+	<!--, parameters: {expand: 'UomDimensionDetails'}  ,  
                 filters: [{ path: 'TenatId', operator: 'EQ', value1: '42'}] -->
-    <Table
-        id="tenantsTable"
-        inset="false"
-        items="{path: '/UnitOfMeasures' }" 
-        mode="SingleSelectMaster"
-        width="auto"
-        growing="true">
-        
-        <headerToolbar>
-            <Toolbar>
-                <Title
-                    id="tableHeader"
-                    text="Units Of Measures"/>
-                <Button id="addButton" text="Add" press="onBtnAddRow"/>
-                <Button id="cpyButton" text="Copy" press="onBtnCpyRow"/>
-                <Button id="savButton" text="Save" press="onBtnSave"/>
-                <Button id="delButton" text="Delete" press="onBtnDelRow"/>
-                <Button id="refButton" text="Refresh" press="onBtnRefresh"/>
-            </Toolbar>
-        </headerToolbar>
-              
-        <columns>
-            <Column width = "10em">
-                <Text text="TenantId" />
-            </Column>
-            <Column width = "10em">
-                <Text text="Client" />
-            </Column>
-            <Column>
-                <Text text="Unit Of Measure" />
-            </Column>
-            <Column>
-                <Text text="Dimension" />
-            </Column>
-        </columns>
-        
-        <items>
-            <ColumnListItem vAlign="Middle" id="ColumnListItemId">
-                <cells>
-                    <Input value="{TenantId}" 
-                           type="{path: '/#UnitOfMeasure/TenantId/@type', formatter:'.formatter.edmTypeToSapUiType'}"/>
-                    <Input value="{Client}" 
-                           maxLength="{ path: '/#UnitOfMeasure/Client/@maxLength', type:'sap.ui.model.type.String'}"
-                           type="{path: '/#UnitOfMeasure/Client/@type', formatter:'.formatter.edmTypeToSapUiType'}"/>
-                    <Input value="{Uom}"  
-                           maxLength="{ path: '/#UnitOfMeasure/Uom/@maxLength', type:'sap.ui.model.type.String'}"
-                           type="{path: '/#UnitOfMeasure/Uom/@type', formatter:'.formatter.edmTypeToSapUiType'}"/>
-                    <ComboBox items="{path: '/UomDimensions'}" selectedKey="{Dimension}">
-                        <items>
-                            <core:ListItem key="{Dimension}" text = "{Dimension}" />
-                        </items>
-                    </ComboBox>
-                </cells>
-            </ColumnListItem>
-        </items>   
-    </Table>
+	<Table id="tenantsTable" inset="false" items="{path: '/UnitOfMeasures'}" mode="SingleSelectMaster" width="auto" growing="true">
+		<headerToolbar>
+			<Toolbar>
+				<Title id="tableHeader" text="Units Of Measures"/>
+				<Button id="addButton" text="Add" press="onBtnAddRow"/>
+				<Button id="cpyButton" text="Copy" press="onBtnCpyRow"/>
+				<Button id="savButton" text="Save" press="onBtnSave"/>
+				<Button id="delButton" text="Delete" press="onBtnDelRow"/>
+				<Button id="refButton" text="Refresh" press="onBtnRefresh"/>
+			</Toolbar>
+		</headerToolbar>
+		<columns>
+			<Column width="10em">
+				<Text text="TenantId"/>
+			</Column>
+			<Column width="10em">
+				<Text text="Client"/>
+			</Column>
+			<Column>
+				<Text text="Unit Of Measure"/>
+			</Column>
+			<Column>
+				<Text text="Dimension"/>
+			</Column>
+		</columns>
+		<items>
+			<ColumnListItem vAlign="Middle" id="columnListItemId">
+				<cells>
+					<Input value="{TenantId}" type="{path: '/#UnitOfMeasure/TenantId/@type', formatter:'.formatter.edmTypeToSapUiType'}"/>
+					<Input value="{Client}" maxLength="{ path: '/#UnitOfMeasure/Client/@maxLength', type:'sap.ui.model.type.String'}"
+						type="{path: '/#UnitOfMeasure/Client/@type', formatter:'.formatter.edmTypeToSapUiType'}"/>
+					<Input value="{Uom}" maxLength="{ path: '/#UnitOfMeasure/Uom/@maxLength', type:'sap.ui.model.type.String'}"
+						type="{path: '/#UnitOfMeasure/Uom/@type', formatter:'.formatter.edmTypeToSapUiType'}"/>
+					<ComboBox items="{path: '/UomDimensions'}" selectedKey="{Dimension}">
+						<items>
+							<core:ListItem key="{Dimension}" text="{Dimension}"/>
+						</items>
+					</ComboBox>
+				</cells>
+			</ColumnListItem>
+		</items>
+	</Table>
 </mvc:View>
-
