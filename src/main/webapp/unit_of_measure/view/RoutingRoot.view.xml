@@ -1,0 +1,7 @@
+<mvc:View
+   controllerName="ys.first.app.controller.RoutingRoot"
+   xmlns="sap.m"
+   xmlns:mvc="sap.ui.core.mvc"
+   displayBlock="true">
+   <App id="routingRoot"/>
+</mvc:View>
