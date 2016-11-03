@@ -47,7 +47,7 @@ sap.ui.define([
 						//controlAggregation: "masterPages"
 					},
 					home: {
-						viewName: "Root",
+						viewName: "MaintItem",
 						viewLevel: 1
 					},
 				    login: {

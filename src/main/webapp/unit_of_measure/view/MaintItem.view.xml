@@ -1,0 +1,36 @@
+<!--maxLength="{ path: '/#MaintenanceItem/Descr/@maxLength', type:'sap.ui.model.type.String'}"-->
+<mvc:View controllerName="ys.first.app.controller.MaintItem" xmlns="sap.ui.table" xmlns:m="sap.m" xmlns:mvc="sap.ui.core.mvc">
+	<m:Toolbar ariaLabelledBy="__text1" width="100%" id="__toolbar2">
+		<m:Button text="SaveAll" press="onSaveAll"/>
+	</m:Toolbar>
+	<TreeTable id="myTreeTable" selectionMode="Single" enableColumnReordering="false" expandFirstLevel="true"
+		rows="{ path : '/MaintenanceItems', parameters : { countMode: 'Inline' } }">
+		<columns>
+			<Column label="Maintenance Item">
+				<template>
+					<m:Label text="{Descr}"/>
+					<!--type="{path: '/#MaintenanceItem/Descr/@type', formatter:'.formatter.edmTypeToSapUiType'}"-->
+				</template>
+			</Column>
+			<Column label="Actions">
+				<template>
+					<m:MenuButton text="Actions">
+						<m:menu>
+							<m:Menu itemSelected="onMenuAction">
+								<m:items>
+									<m:MenuItem text="Add SubItem" key="addSubItem" icon="sap-icon://add"/>
+									<m:MenuItem text="Add Item" key="addItem" icon="sap-icon://add" press="onAddItem"/>
+									<m:MenuItem text="Change Item" key="editItem"  icon="sap-icon://edit"/>
+									<m:MenuItem text="Reassign Item" icon="sap-icon://move"/>
+									<m:MenuItem text="Move Item Up" icon="sap-icon://up"/>
+									<m:MenuItem text="Move Item Down" icon="sap-icon://down"/>
+									<m:MenuItem text="Delete Item" icon="sap-icon://delete"/>
+								</m:items>
+							</m:Menu>
+						</m:menu>
+					</m:MenuButton>
+				</template>
+			</Column>
+		</columns>
+	</TreeTable>
+</mvc:View>

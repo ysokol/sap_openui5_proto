@@ -1,0 +1,12 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<Dialog title="Edit Item: {descr}">
+		<Label text="Description" labelFor="DescrInputId"/>
+		<Input  id="DescrInputId" value="{Descr}" width="90%"/>
+		<beginButton>
+			<Button text="Cancel" press="onEditCancel"/>
+		</beginButton>
+		<endButton>
+			<Button text="Submit" press="onEditSubmit"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>
