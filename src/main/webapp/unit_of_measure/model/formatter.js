@@ -29,7 +29,7 @@ sap.ui.define([], function () {
                 case "Edm.Int16":
                     return sap.ui.model.odata.type.Int16;
                 case "Edm.Int32":
-                    return sap.m.InputType.Number;
+                    return sap.ui.model.odata.type.Int32;
                 case "Edm.Int64":
                     return sap.ui.model.odata.type.Int64;
                 case "Edm.SByte":
@@ -45,6 +45,23 @@ sap.ui.define([], function () {
                 default:
                     return "";
             }
+        },
+        updateFlagToString: function (sValue) {
+        	switch (sValue) {
+        		case "N":
+        			return "New";
+        		case "U":
+        			return "Updated";
+        		case "D":
+        			return "Deleted";
+        		case "":
+        			return "";
+        	}
+        },
+        strategyPackageDetailsKeys: function (sValue) {
+        	debugger;
+        	var keys = ["1Y", "2Y", "3Y"];
+        	return keys;
         }
     };
 

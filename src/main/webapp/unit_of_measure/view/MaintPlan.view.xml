@@ -1,0 +1,19 @@
+<mvc:View xmlns:sap.ui.layout="sap.ui.layout" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" controllerName="ys.first.app.controller.MaintPlan"
+	displayBlock="true">
+	<SplitApp id="MySplitAppId" initialDetail="detail" initialMaster="master" orientationChange="onOrientationChange">
+		<masterPages>
+			<Page id="master" title="Maintenance Items for '{globalProperties>/maintenancePlan}'" icon="sap-icon://action" class="sapUiStdPage">
+				<content>
+					<mvc:XMLView viewName="ys.first.app.view.MaintItem"/>
+				</content>
+			</Page>
+		</masterPages>
+		<detailPages>
+			<Page id="detail" title="Maintenance Operations for '{globalProperties>/maintenancePlan}' / '{globalProperties>/maintenanceItemDescr}'" class="sapUiStdPage">
+				<content>
+					<mvc:XMLView viewName="ys.first.app.view.MaintOperation"/>
+				</content>
+			</Page>
+		</detailPages>
+	</SplitApp>
+</mvc:View>

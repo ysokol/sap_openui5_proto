@@ -1,0 +1,57 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="ys.first.app.controller.MaintSchedule"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<App>
+		<pages>
+			<Page title="Maintenance Schedule for '{globalProperties>/maintenancePlan}'">
+				<content>
+					<Table id="maintenanceScheduleTableId" inset="false" 
+						items="{path: '/MaintenanceSchedules', 
+								parameters: {expand: 'MaintenanceItemDetails,MaintenanceOperationDetails'} }" width="auto" growing="true">
+						<headerToolbar>
+							<Toolbar>
+								<Title text="Maintenance Plans"/>
+								<Button id="rescheduleButton" text="Reschedule" press="onReschedule"/>
+								<Button id="cpyButton" text="Copy" press="onBtnCpyRow"/>
+								<Button id="savButton" text="Save" press="onSaveAll"/>
+								<Button id="delButton" text="Delete" press="onBtnDelRow"/>
+								<Button id="refButton" text="Refresh" press="onBtnRefresh"/>
+							</Toolbar>
+						</headerToolbar>
+						<columns>
+							<Column width="5em">
+								<Text text="Maintenance Plan"/>
+							</Column>
+							<Column width="10em">
+								<Text text="Maintenance Item"/>
+							</Column>
+							<Column width="10em">
+								<Text text="Maintenance Operation"/>
+							</Column>
+							<Column width="10em">
+								<Text text="Document"/>
+							</Column>
+							<Column width="10em">
+								<Text text="Date"/>
+							</Column>
+							<Column width="10em">
+								<Text text="Mileage"/>
+							</Column>
+						</columns>
+						<items>
+							<ColumnListItem vAlign="Middle" id="ColumnListItemId">
+								<cells>
+									<Label text="{MaintenancePlan}"/>
+									<Label text="{MaintenanceItemDetails/Descr}"/>
+									<Label text="{MaintenanceOperationDetails/Descr}"/>
+									<Label text="{MaintenanceDocument}"/>
+									<Label text="{path: 'MaintenanceDate', type: 'sap.ui.model.type.Date', formatOptions: { style: 'short' } }"/>
+									<Label text="{MaintenanceMileage}"/>
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

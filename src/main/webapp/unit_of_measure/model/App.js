@@ -22,21 +22,38 @@ sap.ui.define([
 				sap.m.MessageBox.error(oEvent.getParameters().response.responseText);
 			});
 
+			this.attachPropertyChange(this.onOropertyChange, this);
+			
+			
 			// bind events
-			var binding = new sap.ui.model.Binding(this, "/", this.getContext("/"));
+			/*var binding = new sap.ui.model.odata.v2.ODataContextBinding(this, "/", this.getContext("/"));
 			binding.attachChange(function(oEvent) {
-			//	debugger;
-				//var parameters = oEvent.getParameters();
-				/*debugger;
+				debugger;
 				try {
-				    oEvent.getSource().getBindingContext().setProperty("TenantId", 42);
-				    Property("TenantId");
+				    oEvent.getSource().getBindingContext().getProperty();
 				}
 				catch (err) {
 				    
-				}*/
-			});
+				}
+			}, this);*/
+		},
+		onOropertyChange: function(oEvent) {
+			try {
+				if (oEvent.getParameters().path !== "UpdateFlag") {
+					this.setProperty(oEvent.getParameters().context.getPath() + "/UpdateFlag", "");
+					for (var key in this.getProperty(oEvent.getParameters().context.getPath())) {
+						if (key !== "UpdateFlag") {
+							if (this.getOriginalProperty(oEvent.getParameters().context.getPath() + "/" + key) !==
+								this.getProperty(oEvent.getParameters().context.getPath() + "/" + key)) {
+								this.setProperty(oEvent.getParameters().context.getPath() + "/UpdateFlag", "U");
+								break;
+							}
+						}
+					}
+				}
+			} catch (err) {
 
+			}
 		},
 		_setProperty: function(entity, id, property, value) {
 			this.setProperty("/" + entity + "(" + id.toString() + ")" + "/" + property, value);

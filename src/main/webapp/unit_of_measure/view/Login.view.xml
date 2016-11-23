@@ -1,10 +1,9 @@
 <mvc:View xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" controllerName="ys.first.app.controller.Login" displayBlock="true">
-	<Page title="Vehicle Maintenance" class="sapUiResponsiveContentPadding">
+	<Page title="Vehicle Maintenance Manager" class="sapUiResponsiveContentPadding">
 		<content>
-			<sap.ui.layout.form:SimpleForm editable="true" layout="ResponsiveGridLayout" xmlns:sap.ui.layout.form="sap.ui.layout.form"
-				xmlns:sap.ui.core="sap.ui.core" id="__form1">
+			<sap.ui.layout.form:SimpleForm xmlns:sap.ui.layout.form="sap.ui.layout.form" xmlns:sap.ui.core="sap.ui.core" editable="true" layout="ResponsiveGridLayout" id="__form1">
 				<sap.ui.layout.form:content>
-					<sap.ui.core:Title text="Please login" id="__title0"/>
+					<sap.ui.core:Title text="Please log in" id="__title0"/>
 					<Label text="Login" id="__label3"/>
 					<Input width="100%" id="__input3"/>
 					<Label text="Password" id="__label4"/>
@@ -16,7 +15,7 @@
 							<sap.ui.core:ListItem xmlns:sap.ui.core="sap.ui.core" text="List Item 2" key="item2" id="__item1"/>
 							<sap.ui.core:ListItem xmlns:sap.ui.core="sap.ui.core" text="List Item 3" key="item3" id="__item2"/></items>
 					</ComboBox>
-					<Button text="Login" press="onLogin"/>
+					<Button text="Log in" press="onLogin"/>
 				</sap.ui.layout.form:content>
 			</sap.ui.layout.form:SimpleForm>
 		</content>

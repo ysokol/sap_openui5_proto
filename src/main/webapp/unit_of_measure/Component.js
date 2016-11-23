@@ -20,15 +20,19 @@ sap.ui.define([
 					}
 				},
 				routes: [{
-					pattern: "client/{id}/uom",
-					name: "uom",
-					target: "uom"
+					pattern: "MaintenancePlan/{id}",
+					name: "maintenancePlan",
+					target: "maintenancePlan"
 				}, {
-					pattern: "client",
+					pattern: "MaintenanceSchedule/{id}",
+					name: "maintenanceSchedule",
+					target: "maintenanceSchedule"
+				}, {
+					pattern: "Client",
 					name: "client",
 					target: "client"
 				}, {
-					pattern: "login",
+					pattern: "Login",
 					name: "login",
 					target: "login"
 				}, {
@@ -47,7 +51,15 @@ sap.ui.define([
 						//controlAggregation: "masterPages"
 					},
 					home: {
-						viewName: "MaintItem",
+						viewName: "MaintPlanList",
+						viewLevel: 1
+					},
+					maintenancePlan: {
+						viewName: "MaintPlan",
+						viewLevel: 1
+					},
+					maintenanceSchedule: {
+						viewName: "MaintSchedule",
 						viewLevel: 1
 					},
 				    login: {
