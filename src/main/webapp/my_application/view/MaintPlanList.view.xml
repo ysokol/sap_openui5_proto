@@ -7,7 +7,7 @@
             <Toolbar>
                 <Title text="Maintenance Plans"/>
                 <Button id="addButton" text="Add" press="onAddRecord"/>
-                <Button id="cpyButton" text="Copy" press="onBtnCpyRow"/>
+                <Button id="newMaintDocm" text="New Maintenance Document" press="onNewMaintDoc"/>
                 <Button id="savButton" text="Save" press="onSaveAll"/>
                 <Button id="delButton" text="Delete" press="onBtnDelRow"/>
                 <Button id="refButton" text="Refresh" press="onBtnRefresh"/>

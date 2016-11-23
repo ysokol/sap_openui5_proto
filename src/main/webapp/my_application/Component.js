@@ -28,6 +28,10 @@ sap.ui.define([
 					name: "maintenanceSchedule",
 					target: "maintenanceSchedule"
 				}, {
+					pattern: "MaintenanceDoc/{id}",
+					name: "maintenanceDoc",
+					target: "maintenanceDoc"
+				}, {
 					pattern: "Client",
 					name: "client",
 					target: "client"
@@ -60,6 +64,10 @@ sap.ui.define([
 					},
 					maintenanceSchedule: {
 						viewName: "MaintSchedule",
+						viewLevel: 1
+					},
+					maintenanceDoc: {
+						viewName: "MaintDoc",
 						viewLevel: 1
 					},
 				    login: {

@@ -30,6 +30,12 @@ sap.ui.define([
 			}
 		},
 		
+		onNewMaintDoc: function(oEvent) {
+			this._oRouter.navTo("maintenanceDoc", {
+				id: 1
+			});
+		},
+		
 		onViewSchedule: function(oEvent) {
 			if (oEvent.getSource().getBindingContext().getProperty("MaintenancePlan")) {
 				this._oRouter.navTo("maintenanceSchedule", {
