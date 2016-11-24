@@ -23,7 +23,8 @@ sap.ui.define([
 				maintenancePlan: "DR650",
 				maintenanceItemId: -1,
 				maintenanceOperationId: -1,
-				maintenanceOperationDescr: ""
+				maintenanceOperationDescr: "",
+                                maintenanceDoc: -1
 			});
 			this._oGlobalModel.setDefaultBindingMode(BindingMode.TwoWay);
 			this._oComponent.setModel(this._oGlobalModel, "globalProperties");

@@ -1,6 +1,6 @@
 <mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns:core="sap.ui.core" xmlns="sap.uxap" xmlns:layout="sap.ui.layout" xmlns:m="sap.m"
           xmlns:f="sap.ui.layout.form" controllerName="ys.first.app.controller.MaintDoc" height="100%">
-    <ObjectPageLayout id="ObjectPageLayout" alwaysShowContentHeader="true">
+    <ObjectPageLayout id="objectPageLayoutId" alwaysShowContentHeader="true">
         <headerTitle>
             <ObjectPageHeader id="headerForTest" headerDesign="Light" objectTitle="Denise Smith"
                               objectSubtitle="Example of a ObjectPage with Header Content always shown on desktop" objectImageShape="Circle"
@@ -24,15 +24,14 @@
                 </f:layout>
                 <f:formContainers>
                     <f:FormContainer>
-                        <f:FormElement label="Name">
+                        <f:FormElement label="Maintenance Document">
                             <f:fields>
-                                <m:Input value="SupplierName" id="name"/>
+                                <m:Input value="{MaintenanceDoc}" id="name"/>
                             </f:fields>
                         </f:FormElement>
-                        <f:FormElement label="Street">
+                        <f:FormElement label="Text">
                             <f:fields>
-                                <m:Input value="Street" />
-                                <m:Input value="HouseNumber"/>
+                                <m:Input value="{Text}" />
                             </f:fields>
                         </f:FormElement>
                     </f:FormContainer>
@@ -43,16 +42,27 @@
             <ObjectPageSection title="Operations">
                 <ObjectPageSubSection title="List of operations">
                     <blocks>
-                        <m:Table id="maintenancePlanTableId" inset="false" width="auto" growing="true">
+                        <m:Table id="docLinesTableId" items="{path: 'MaintenanceDocLineDetails'}" inset="false" width="auto" growing="true">
+                            <m:headerToolbar>
+                                <m:Toolbar>
+                                    <m:Button id="addButton" text="Add Line" press="onAddLine"/>
+                                </m:Toolbar>
+                            </m:headerToolbar>
                             <m:columns>
                                 <m:Column width="5em">
-                                    <m:Text text="Maintenance Plan"/>
+                                    <m:Text text="Line"/>
+                                </m:Column>
+                                <m:Column width="5em">
+                                    <m:Text text="Mileage"/>
                                 </m:Column>
                             </m:columns>
                             <m:items>
                                 <m:ColumnListItem vAlign="Middle" id="ColumnListItemId" type="Detail" detailPress="onNavigation">
                                     <m:cells>
-                                        <m:Label text="123"/>
+                                        <m:Label text="{MaintenanceDocLine}"/>
+                                    </m:cells>
+                                    <m:cells>
+                                        <m:Input value="{MaintenanceMileage}"/>
                                     </m:cells>
                                 </m:ColumnListItem>
                             </m:items>
