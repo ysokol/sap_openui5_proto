@@ -1,21 +1,10 @@
-<mvc:View 
-        xmlns:mvc="sap.ui.core.mvc" 
-		xmlns:core="sap.ui.core"
-		xmlns="sap.uxap"
-		xmlns:layout="sap.ui.layout"
-		xmlns:m="sap.m"
-		xmlns:f="sap.ui.layout.form"
-		controllerName="ys.first.app.controller.MaintDoc"
-		height="100%">
- 
+<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns:core="sap.ui.core" xmlns="sap.uxap" xmlns:layout="sap.ui.layout" xmlns:m="sap.m"
+	xmlns:f="sap.ui.layout.form" controllerName="ys.first.app.controller.MaintDoc" height="100%">
 	<ObjectPageLayout id="ObjectPageLayout" alwaysShowContentHeader="true">
 		<headerTitle>
-			<ObjectPageHeader id="headerForTest"
-							  headerDesign="Light"
-							  objectTitle="Denise Smith"
-							  objectSubtitle="Example of a ObjectPage with Header Content always shown on desktop"
-							  objectImageShape="Circle"
-							  objectImageURI="./test-resources/sap/uxap/images/imageID_275314.png">
+			<ObjectPageHeader id="headerForTest" headerDesign="Light" objectTitle="Denise Smith"
+				objectSubtitle="Example of a ObjectPage with Header Content always shown on desktop" objectImageShape="Circle"
+				objectImageURI="./test-resources/sap/uxap/images/imageID_275314.png">
 				<actions>
 					<ObjectPageHeaderActionButton icon="sap-icon://action" text="action"/>
 					<ObjectPageHeaderActionButton icon="sap-icon://action-settings" text="settings"/>
@@ -26,21 +15,56 @@
 			</ObjectPageHeader>
 		</headerTitle>
 		<headerContent>
-			<m:Text width="200px"
-					text="Hi, I'm Denise. I am passionate about what I do and I'll go the extra mile to make the customer win."/>
-			<layout:VerticalLayout>
-				<m:ObjectStatus title="User ID" text="12345678"/>
-				<m:ObjectStatus title="Functional Area" text="Developement"/>
-				<m:ObjectStatus title="Cost Center" text="PI DFA GD Programs and Product"/>
-				<m:ObjectStatus title="Email" text="email@address.com"/>
-			</layout:VerticalLayout>
+			<f:Form maxContainerCols="2">
+				<f:title>
+					<core:Title text="Address"/>
+				</f:title>
+				<f:layout>
+					<f:ResponsiveGridLayout labelSpanL="3" labelSpanM="3" emptySpanL="4" emptySpanM="4" columnsL="1" columnsM="1"/>
+				</f:layout>
+				<f:formContainers>
+					<f:FormContainer>
+						<f:formElements>
+							<f:FormElement label="Name">
+								<f:fields>
+									<m:Text text="SupplierName"/>
+								</f:fields>
+							</f:FormElement>
+							<f:FormElement label="Street">
+								<f:fields>
+									<m:Text text="Street HouseNumber"/>
+								</f:fields>
+							</f:FormElement>
+						</f:formElements>
+					</f:FormContainer>
+				</f:formContainers>
+			</f:Form>
 		</headerContent>
 		<sections>
 			<ObjectPageSection title="Operations">
-				<ObjectPageSubSection title=" ">
+				<ObjectPageSubSection title="List of operations">
 					<blocks>
-						<m:Text width="200px"
-							text="Hi, I'm Denise. I am passionate about what I do and I'll go the extra mile to make the customer win."/>
+						<m:Table id="maintenancePlanTableId" inset="false" width="auto" growing="true">
+							<m:columns>
+								<m:Column width="5em">
+									<m:Text text="Maintenance Plan"/>
+								</m:Column>
+							</m:columns>
+							<m:items>
+								<m:ColumnListItem vAlign="Middle" id="ColumnListItemId" type="Detail" detailPress="onNavigation">
+									<m:cells>
+										<m:Label text="123"/>
+									</m:cells>
+								</m:ColumnListItem>
+							</m:items>
+						</m:Table>
+					</blocks>
+				</ObjectPageSubSection>
+			</ObjectPageSection>
+			<ObjectPageSection title="Materials">
+				<ObjectPageSubSection title="List of materials">
+					<blocks>
+						<m:ObjectStatus title="User ID" text="12345678"/>
 					</blocks>
 				</ObjectPageSubSection>
 			</ObjectPageSection>

@@ -11,5 +11,10 @@
       "templateVersion": "1.4.0",
       "dateTimeStamp": "Wed, 23 Nov 2016 21:04:37 GMT"
     }
-  ]
+  ],
+  "basevalidator": {
+    "services": {
+      "xml": "fioriXmlAnalysis"
+    }
+  }
 }
