@@ -27,6 +27,16 @@ sap.ui.define([
                 });
             }
         },
+        onMenuAction: function (oEvent) {
+            switch (oEvent.getParameter("item").getKey()) {
+                case "keyViewSchedule":
+                    this.onViewSchedule(oEvent);
+                    break;
+                case "keyEditPlan":
+                    this.onAddItemAfter(oEvent);
+                    break;
+            }
+        },
         onNewMaintDoc: function (oEvent) {
             this._oRouter.navTo("maintenanceDoc", {
                 id: 1
@@ -47,6 +57,13 @@ sap.ui.define([
         },
         onSaveAll: function (oEvent) {
             this._oModel.submitChanges();
+        },
+        onRefresh: function (oEvent) {
+            this._oModel.refresh(true, true);
+        },
+        onResetAllChanges: function (oEvent) {
+            this._oModel.resetChanges();
+            this._oModel.refresh(true, true);
         }
 
     });

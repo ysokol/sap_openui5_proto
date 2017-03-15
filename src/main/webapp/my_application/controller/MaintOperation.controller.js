@@ -105,6 +105,13 @@ sap.ui.define([
         },
         onSaveAll: function (oEvent) {
             this._oModel.submitChanges();
+        },
+        onRefresh: function (oEvent) {
+            this._oModel.refresh(true, true);
+        },
+        onResetAllChanges: function (oEvent) {
+            this._oModel.resetChanges();
+            this._oModel.refresh(true, true);
         }
 
     });

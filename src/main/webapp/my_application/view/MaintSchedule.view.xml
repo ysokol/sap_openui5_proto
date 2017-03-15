@@ -1,57 +1,98 @@
 <mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="ys.first.app.controller.MaintSchedule"
-	xmlns:html="http://www.w3.org/1999/xhtml">
-	<App>
-		<pages>
-			<Page title="Maintenance Schedule for '{globalProperties>/maintenancePlan}'">
-				<content>
-					<Table id="maintenanceScheduleTableId" inset="false" 
-						items="{path: '/MaintenanceSchedules', 
-								parameters: {expand: 'MaintenanceItemDetails,MaintenanceOperationDetails'} }" width="auto" growing="true">
-						<headerToolbar>
-							<Toolbar>
-								<Title text="Maintenance Plans"/>
-								<Button id="rescheduleButton" text="Reschedule" press="onReschedule"/>
-								<Button id="cpyButton" text="Copy" press="onBtnCpyRow"/>
-								<Button id="savButton" text="Save" press="onSaveAll"/>
-								<Button id="delButton" text="Delete" press="onBtnDelRow"/>
-								<Button id="refButton" text="Refresh" press="onBtnRefresh"/>
-							</Toolbar>
-						</headerToolbar>
-						<columns>
-							<Column width="5em">
-								<Text text="Maintenance Plan"/>
-							</Column>
-							<Column width="10em">
-								<Text text="Maintenance Item"/>
-							</Column>
-							<Column width="10em">
-								<Text text="Maintenance Operation"/>
-							</Column>
-							<Column width="10em">
-								<Text text="Document"/>
-							</Column>
-							<Column width="10em">
-								<Text text="Date"/>
-							</Column>
-							<Column width="10em">
-								<Text text="Mileage"/>
-							</Column>
-						</columns>
-						<items>
-							<ColumnListItem vAlign="Middle" id="ColumnListItemId">
-								<cells>
-									<Label text="{MaintenancePlan}"/>
-									<Label text="{MaintenanceItemDetails/Descr}"/>
-									<Label text="{MaintenanceOperationDetails/Descr}"/>
-									<Label text="{MaintenanceDocument}"/>
-									<Label text="{path: 'MaintenanceDate', type: 'sap.ui.model.type.Date', formatOptions: { style: 'short' } }"/>
-									<Label text="{MaintenanceMileage}"/>
-								</cells>
-							</ColumnListItem>
-						</items>
-					</Table>
-				</content>
-			</Page>
-		</pages>
-	</App>
+          xmlns:html="http://www.w3.org/1999/xhtml">
+    <App>
+        <pages>
+            <Page title="Maintenance Schedule for '{globalProperties>/maintenancePlan}'">
+                <content>
+                    <Table id="maintenanceScheduleTableId" inset="false" 
+                           mode = "MultiSelect"                
+                           items="{ path: '/MaintenanceSchedules', 
+                                    parameters: { expand: 'MaintenanceItemDetails,MaintenanceOperationDetails,StatusSchemaDetails' },
+                                    sorter : {
+                                            path: 'Status',
+                                            descending: true,
+                                            group: true
+                                    }
+                                   }" 
+                           width="auto" growing="true">
+                        <headerToolbar>
+                            <Toolbar>
+                                <Button id="rescheduleButton" text="Reschedule" press="onReschedule" icon="sap-icon://restart"/>
+                                <Button id="confirmButton" text="Confirm Operations" press="onConfirmOpearations" icon="sap-icon://accept"/>
+                                <Button id="refreshButton" text="Refresh" press="onRefresh" icon="sap-icon://refresh"/>
+                                <Button id="saveButton" text="Save All Changes" press="onSaveAll" icon="sap-icon://save"/>
+                                <Button id="resetButton" text="Reset All Changes" press="onResetAllChanges" icon="sap-icon://reset"/>
+                            </Toolbar>
+                        </headerToolbar>
+                        <columns>
+                            <Column width="5em">
+                                <Text text="Maintenance Plan"/>
+                            </Column>
+                            <Column width="10em">
+                                <Text text="Maintenance Item"/>
+                            </Column>
+                            <Column width="10em">
+                                <Text text="Maintenance Operation"/>
+                            </Column>
+                            <Column width="5em">
+                                <Text text="Document"/>
+                            </Column>
+                            <Column width="5em">
+                                <Text text="Time Pack."/>
+                            </Column>
+                            <Column width="5em">
+                                <Text text="Mileage Pack."/>
+                            </Column>
+                            <Column width="6em">
+                                <Text text="Date"/>
+                            </Column>
+                            <Column width="5em">
+                                <Text text="Mileage"/>
+                            </Column>
+                            <Column width="5em">
+                                <Text text="Status"/>
+                            </Column>
+                            <Column width="5em">
+                                <Text text="Actions"/>
+                            </Column>
+                            <Column width="5em">
+                                <Text text="Changed Status"/>
+                            </Column>
+                        </columns>
+                        <items>
+                            <ColumnListItem vAlign="Middle" id="ColumnListItemId">
+                                <cells>
+                                    <Label text="{MaintenancePlan}"/>
+                                    <Label text="{MaintenanceItemDetails/Descr}"/>
+                                    <Label text="{MaintenanceOperationDetails/Descr}"/>
+                                    <!--<Label text="{MaintenanceDoc}"/>-->
+                                    <Link text="{MaintenanceDoc}" press="onMaintenanceDocPress"/>
+                                    <Label text="{TimeStrategyPackage}"/>
+                                    <Label text="{DistStrategyPackage}"/>
+                                    <DatePicker value="{path:'MaintenanceDate', 
+                                        type:'sap.ui.model.type.Date', 
+                                        formatOptions: { style: 'short', strictParsing: true}}"/>
+                                    <!--<Label text="{path: 'MaintenanceDate', type: 'sap.ui.model.type.Date', formatOptions: { style: 'short' } }"/>-->
+                                    <Input value="{MaintenanceMileage}" type="Number"/>
+                                     <!--<Label text="{path: 'Status', formatter:'.formatter.scheduleStatusToStr'}"/>-->
+                                    <Label text="{StatusSchemaDetails/Descr}"/>                            
+                                    <MenuButton text="Actions">
+                                        <menu>
+                                            <Menu itemSelected="onMenuAction">
+                                                <items>
+                                                    <MenuItem text="Confirm Operation" key="keyConfirm" icon="sap-icon://accept"/>
+                                                    <MenuItem text="Cancel Confirmation"  key="keyCancel" icon="sap-icon://decline"/>
+                                                </items>
+                                            </Menu>
+                                        </menu>
+                                    </MenuButton>
+                                    <Label text="{path: 'UpdateFlag', formatter:'.formatter.updateFlagToString'}"/>
+                                </cells>
+                            </ColumnListItem>
+                        </items>
+                    </Table>
+                </content>
+            </Page>
+        </pages>
+    </App>
 </mvc:View>

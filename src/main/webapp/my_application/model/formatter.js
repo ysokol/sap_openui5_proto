@@ -21,21 +21,21 @@ sap.ui.define([], function () {
                 case "Edm.DateTimeOffset":
                     return sap.ui.model.odata.type.DateTimeOffset;
                 case "Edm.Decimal":
-                    return sap.ui.model.odata.type.Decimal;
+                    return sap.m.InputType.Number;
                 case "Edm.Double":
                     return sap.ui.model.odata.type.Double;
                 case "Edm.Guid":
                     return sap.ui.model.odata.type.Guid;
                 case "Edm.Int16":
-                    return sap.ui.model.odata.type.Int16;
+                    return sap.m.InputType.Number;
                 case "Edm.Int32":
-                    return sap.ui.model.odata.type.Int32;
+                    return sap.m.InputType.Number;
                 case "Edm.Int64":
-                    return sap.ui.model.odata.type.Int64;
+                    return sap.m.InputType.Number;
                 case "Edm.SByte":
                     return sap.ui.model.odata.type.SByte;
                 case "Edm.Single":
-                    return sap.ui.model.odata.type.Single;
+                    return sap.m.InputType.Number;
                 case "Edm.String":
                     return sap.m.InputType.Text;
                 case "Edm.Time":
@@ -47,21 +47,46 @@ sap.ui.define([], function () {
             }
         },
         updateFlagToString: function (sValue) {
-        	switch (sValue) {
-        		case "N":
-        			return "New";
-        		case "U":
-        			return "Updated";
-        		case "D":
-        			return "Deleted";
-        		case "":
-        			return "";
-        	}
+            switch (sValue) {
+                case "N":
+                    return "New";
+                case "U":
+                    return "Updated";
+                case "D":
+                    return "Deleted";
+                case "":
+                    return "";
+            }
         },
-        strategyPackageDetailsKeys: function (sValue) {
-        	debugger;
-        	var keys = ["1Y", "2Y", "3Y"];
-        	return keys;
+        docStatusToStr: function (sValue) {
+            switch (sValue) {
+                case "D":
+                    return "Draft";
+                case "P":
+                    return "Posted";
+                default:
+                    return "Error Status";   
+            } 
+        },
+        docStatusToState: function (sValue) {
+            switch (sValue) {
+                case "D":
+                    return sap.ui.core.ValueState.Warning;
+                case "P":
+                    return sap.ui.core.ValueState.Success;
+                default:
+                    return sap.ui.core.ValueState.Error;   
+            } 
+        },
+        scheduleStatusToStr: function (sValue) {
+            switch (sValue) {
+                case "P":
+                    return "Planned";
+                case "C":
+                    return "Confirmed";
+                default:
+                    return "Error Status";   
+            } 
         }
     };
 

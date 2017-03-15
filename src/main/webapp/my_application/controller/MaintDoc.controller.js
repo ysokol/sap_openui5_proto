@@ -14,41 +14,53 @@ sap.ui.define([
             this._oEventBus = sap.ui.getCore().getEventBus();
             this._oRouter = sap.ui.core.UIComponent.getRouterFor(this);
             this._oInitialLoadFinishedDeferred = jQuery.Deferred();
-            
+
             this.getView().setModel(this._oModel);
             sap.ui.getCore().setModel(this._oModel);
             this._oRouter.attachRoutePatternMatched(this.onRouteMatched, this);
+            this._oModel.attachMetadataLoaded(function () {
+                this._oInitialLoadFinishedDeferred.resolve();
+            }, this)
 
         },
         onRouteMatched: function (oEvent) {
             var oParameters = oEvent.getParameters();
 
-            if (oParameters.name !== "maintenanceDoc") {
-                return;
-            }
+            jQuery.when(this._oInitialLoadFinishedDeferred).then(jQuery.proxy(function () {
+                if (oParameters.name !== "maintenanceDoc") {
+                    return;
+                }
 
-            this._oGlobalModel.setProperty("/maintenanceDoc", oParameters.arguments.id);
-            this._oEventBus.publish("MaintenanceDoc", "onMaintenanceDocOpened", {
-                maintenanceDoc: oParameters.arguments.id
-            });
-            
-            var maintenanceDoc = {
-                MaintenanceDoc: oParameters.arguments.id
-            }
-            this._oObjectPage.bindObject( this._oModel.createKey("/MaintenanceDocs", maintenanceDoc) );
-            
+                this._oGlobalModel.setProperty("/maintenanceDoc", oParameters.arguments.id);
+                this._oEventBus.publish("MaintenanceDoc", "onMaintenanceDocOpened", {
+                    maintenanceDoc: oParameters.arguments.id
+                });
+
+                var maintenanceDoc = {
+                    MaintenanceDoc: oParameters.arguments.id
+                }
+                this._oObjectPage.bindObject(this._oModel.createKey("/MaintenanceDocs", maintenanceDoc));
+            }, this));
+
         },
         onAddLine: function (oEvent) {
             debugger;
-            var collection = oEvent.getSource().getParent().getParent().getBindingContext().getPath() + 
+            var collectionPath = oEvent.getSource().getParent().getParent().getBindingContext().getPath() + 
                    "/" + oEvent.getSource().getParent().getParent().getBindingPath("items");
-            this._oModel.create(collection, {
-                MaintenanceDoc: 1,
-                MaintenanceDocLine: 1,
-                MaintenanceItemId: 7,
-                Text: "Test34"
+            var that = this;
+            this._oModel.callFunction("/MaintenanceDocAddLine", {
+                method: "POST",
+                urlParameters: {
+                    MaintenanceDoc: this._oGlobalModel.getProperty("/maintenanceDoc")
+                },
+                success: function () {
+                    that._oModel.refresh();
+                }
             });
-        }
+        },
+        onDeleteLine: function (oEvent) {
+            this._oModel.remove(oEvent.getSource().getParent().getBindingContext().getPath());
+        },
     });
 
 });

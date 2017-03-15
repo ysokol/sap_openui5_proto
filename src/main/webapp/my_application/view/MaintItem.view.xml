@@ -1,43 +1,43 @@
 <!--maxLength="{ path: '/#MaintenanceItem/Descr/@maxLength', type:'sap.ui.model.type.String'}"-->
 <mvc:View controllerName="ys.first.app.controller.MaintItem" xmlns="sap.ui.table" xmlns:m="sap.m" xmlns:mvc="sap.ui.core.mvc">
-	<m:Toolbar ariaLabelledBy="__text1" width="100%" id="__toolbar2">
-		<m:Button text="Add Item" icon="sap-icon://add" press="onAddItem"/>
-		<m:Button text="Save All" press="onSaveAll"/>
-		<m:Button text="Expand All" press="onExpandAll"/>
-	</m:Toolbar>
-	<TreeTable id="myTreeTable" selectionMode="Single"  enableColumnReordering="false" expandFirstLevel="true" enableBusyIndicator="true"
-		rows="{ path : '/MaintenanceItems', parameters : { countMode: 'Inline' } }">
-		<columns>
-			<Column label="Maintenance Item">
-				<template>
-					<m:Label text="{Descr}"/>
-					<!--type="{path: 'UpdateFlag', formatter:'.formatter.edmTypeToSapUiType'}"-->
-				</template>
-			</Column>
-			<Column label="Actions" width = "8rem">
-				<template>
-					<m:MenuButton text="Actions">
-						<m:menu>
-							<m:Menu itemSelected="onMenuAction">
-								<m:items>
-									<m:MenuItem text="Add SubItem" key="addSubItem" icon="sap-icon://add"/>
-									<m:MenuItem text="Add Item" key="addItem" icon="sap-icon://add" press="onAddItem"/>
-									<m:MenuItem text="Change Item" key="editItem"  icon="sap-icon://edit"/>
-									<m:MenuItem text="Reassign Item" icon="sap-icon://move"/>
-									<m:MenuItem text="Move Item Up" icon="sap-icon://up"/>
-									<m:MenuItem text="Move Item Down" icon="sap-icon://down"/>
-									<m:MenuItem text="Delete Item" key="deleteItem" icon="sap-icon://delete"/>
-								</m:items>
-							</m:Menu>
-						</m:menu>
-					</m:MenuButton>
-				</template>
-			</Column>
-			<Column label="Changed" width = "5rem">
-				<template>
-					<m:Label text="{path: 'UpdateFlag', formatter:'.formatter.updateFlagToString'}"/>
-				</template>
-			</Column>
-		</columns>
-	</TreeTable>
+    <m:Toolbar ariaLabelledBy="__text1" width="100%" id="__toolbar2">
+        <m:Button text="Add Item" press="onAddItem" icon="sap-icon://add"/>
+        <m:Button text="Save All" press="onSaveAll" icon="sap-icon://save"/>
+        <m:Button text="Expand All" press="onExpandAll" icon="sap-icon://expand-group"/>
+    </m:Toolbar>
+    <TreeTable id="myTreeTable" selectionMode="Single"  enableColumnReordering="false" expandFirstLevel="true" enableBusyIndicator="true"
+                   rows="{ path : '/MaintenanceItems', parameters : { countMode: 'Inline' } }">
+        <columns>
+            <Column label="Maintenance Item">
+                <template>
+                    <m:Label text="{Descr}"/>
+                    <!--type="{path: 'UpdateFlag', formatter:'.formatter.edmTypeToSapUiType'}"-->
+                </template>
+            </Column>
+            <Column label="Actions" width = "8rem">
+                <template>
+                    <m:MenuButton text="Actions">
+                        <m:menu>
+                            <m:Menu itemSelected="onMenuAction">
+                                <m:items>
+                                    <m:MenuItem text="Add SubItem" key="addSubItem" icon="sap-icon://add"/>
+                                    <m:MenuItem text="Add Item" key="addItem" icon="sap-icon://add" press="onAddItem"/>
+                                    <m:MenuItem text="Change Item" key="editItem"  icon="sap-icon://edit"/>
+                                    <m:MenuItem text="Reassign Item" icon="sap-icon://move"/>
+                                    <m:MenuItem text="Move Item Up" icon="sap-icon://up"/>
+                                    <m:MenuItem text="Move Item Down" icon="sap-icon://down"/>
+                                    <m:MenuItem text="Delete Item" key="deleteItem" icon="sap-icon://delete"/>
+                                </m:items>
+                            </m:Menu>
+                        </m:menu>
+                    </m:MenuButton>
+                </template>
+            </Column>
+            <Column label="Changed" width = "5rem">
+                <template>
+                    <m:Label text="{path: 'UpdateFlag', formatter:'.formatter.updateFlagToString'}"/>
+                </template>
+            </Column>
+        </columns>
+    </TreeTable>
 </mvc:View>

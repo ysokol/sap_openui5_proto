@@ -2,36 +2,41 @@
           xmlns:f="sap.ui.layout.form" controllerName="ys.first.app.controller.MaintDoc" height="100%">
     <ObjectPageLayout id="objectPageLayoutId" alwaysShowContentHeader="true">
         <headerTitle>
-            <ObjectPageHeader id="headerForTest" headerDesign="Light" objectTitle="Denise Smith"
-                              objectSubtitle="Example of a ObjectPage with Header Content always shown on desktop" objectImageShape="Circle"
-                              objectImageURI="./test-resources/sap/uxap/images/imageID_275314.png">
+            <ObjectPageHeader id="headerForTest" headerDesign="Light" objectTitle="Maintenance Document # {MaintenanceDoc} ({path: 'Status', formatter:'.formatter.docStatusToStr'}) ">
                 <actions>
-                    <ObjectPageHeaderActionButton icon="sap-icon://action" text="action"/>
-                    <ObjectPageHeaderActionButton icon="sap-icon://action-settings" text="settings"/>
-                    <ObjectPageHeaderActionButton icon="sap-icon://edit" text="edit"/>
-                    <ObjectPageHeaderActionButton icon="sap-icon://save" text="save" visible="false"/>
-                    <ObjectPageHeaderActionButton icon="sap-icon://refresh" text="{buttons>/text}"/>
+                    <ObjectPageHeaderActionButton icon="sap-icon://edit" text="Edit"/>
+                    <ObjectPageHeaderActionButton icon="sap-icon://cancel" text="Reverse"/>
                 </actions>
             </ObjectPageHeader>
         </headerTitle>
         <headerContent>
-            <f:Form maxContainerCols="2">
-                <f:title>
+            <f:Form width="95%">
+                <!--<f:title>
                     <core:Title text="Address"/>
-                </f:title>
+                </f:title>-->
                 <f:layout>
-                    <f:ResponsiveGridLayout labelSpanL="3" labelSpanM="3" emptySpanL="4" emptySpanM="4" columnsL="1" columnsM="1"/>
+                    <f:ResponsiveGridLayout/>
                 </f:layout>
                 <f:formContainers>
                     <f:FormContainer>
-                        <f:FormElement label="Maintenance Document">
+                        <f:FormElement label="Document Date">
                             <f:fields>
-                                <m:Input value="{MaintenanceDoc}" id="name"/>
+                                <m:Label text="{ path: 'DocumentDate', type: 'sap.ui.model.type.Date', formatOptions: {style: 'short'} }" />
+                            </f:fields>
+                        </f:FormElement>
+                        <f:FormElement label="Posting Date">
+                            <f:fields>
+                                <m:Label text="{ path: 'PostingDate', type: 'sap.ui.model.type.Date', formatOptions: {style: 'short'} }" />
                             </f:fields>
                         </f:FormElement>
                         <f:FormElement label="Text">
                             <f:fields>
-                                <m:Input value="{Text}" />
+                                <m:Label text="{Text}" />
+                            </f:fields>
+                        </f:FormElement>
+                        <f:FormElement label="Reversal\Reversed By">
+                            <f:fields>
+                                <m:Label text="{ReversalDoc}" />
                             </f:fields>
                         </f:FormElement>
                     </f:FormContainer>
@@ -42,15 +47,31 @@
             <ObjectPageSection title="Operations">
                 <ObjectPageSubSection title="List of operations">
                     <blocks>
-                        <m:Table id="docLinesTableId" items="{path: 'MaintenanceDocLineDetails'}" inset="false" width="auto" growing="true">
-                            <m:headerToolbar>
+                        <m:Table id="docLinesTableId" items="{path: 'MaintenanceDocLineDetails', 
+                                                                parameters: {expand: 'MaintenanceItemDetails,MaintenanceOperationDetails'} }" inset="false" width="auto" growing="true">
+                            <!--<m:headerToolbar>
                                 <m:Toolbar>
-                                    <m:Button id="addButton" text="Add Line" press="onAddLine"/>
+                                    <m:Button id="addButton" text="Add Line" press="onAddLine" icon="sap-icon://add"/>
                                 </m:Toolbar>
-                            </m:headerToolbar>
+                            </m:headerToolbar>-->
                             <m:columns>
                                 <m:Column width="5em">
-                                    <m:Text text="Line"/>
+                                    <m:Text text="Maintenance Plan"/>
+                                </m:Column>
+                                <m:Column width="10em">
+                                    <m:Text text="Maintenance Item"/>
+                                </m:Column>
+                                <m:Column width="10em">
+                                    <m:Text text="Maintenance Operation"/>
+                                </m:Column>
+                                <m:Column width="5em">
+                                    <m:Text text="Time Pack."/>
+                                </m:Column>
+                                <m:Column width="5em">
+                                    <m:Text text="Mileage Pack."/>
+                                </m:Column>
+                                <m:Column width="6em">
+                                    <m:Text text="Date"/>
                                 </m:Column>
                                 <m:Column width="5em">
                                     <m:Text text="Mileage"/>
@@ -59,10 +80,16 @@
                             <m:items>
                                 <m:ColumnListItem vAlign="Middle" id="ColumnListItemId" type="Detail" detailPress="onNavigation">
                                     <m:cells>
-                                        <m:Label text="{MaintenanceDocLine}"/>
-                                    </m:cells>
-                                    <m:cells>
-                                        <m:Input value="{MaintenanceMileage}"/>
+                                        <m:Label text="{MaintenancePlan}"/>
+                                        <m:Label text="{MaintenanceItemDetails/Descr}"/>
+                                        <m:Label text="{MaintenanceOperationDetails/Descr}"/>
+                                        <m:Label text="{TimeStrategyPackage}"/>
+                                        <m:Label text="{DistStrategyPackage}"/>
+                                        <m:Label text="{path:'MaintenanceDate', 
+                                        type:'sap.ui.model.type.Date', 
+                                        formatOptions: { style: 'short', strictParsing: true}}"/>
+                                        <!--<Label text="{path: 'MaintenanceDate', type: 'sap.ui.model.type.Date', formatOptions: { style: 'short' } }"/>-->
+                                        <m:Label text="{MaintenanceMileage}" type="Number"/>
                                     </m:cells>
                                 </m:ColumnListItem>
                             </m:items>
@@ -73,7 +100,7 @@
             <ObjectPageSection title="Materials">
                 <ObjectPageSubSection title="List of materials">
                     <blocks>
-                        <m:ObjectStatus title="User ID" text="12345678"/>
+                        <m:ObjectStatus title="List of Materials" text="Under Construction"/>
                     </blocks>
                 </ObjectPageSubSection>
             </ObjectPageSection>

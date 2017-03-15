@@ -1,89 +1,102 @@
 <mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns:core="sap.ui.core" xmlns:semantic="sap.m.semantic" xmlns="sap.m"
-	controllerName="ys.first.app.controller.MaintOperation">
-	<Table id="maintOperationTableId"
-		items="{	path: '/MaintenanceOperations', 
+          controllerName="ys.first.app.controller.MaintOperation">
+    <Table id="maintOperationTableId"
+               items="{	path: '/MaintenanceOperations', 
 		        	filters: [{ path: 'MaintenanceItemId', operator: 'EQ', value1: '-1'}],
 		        	parameters: {expand: 'MaintenanceOperationTimePackageDetails' }  
 		        }">
-		<headerToolbar>
-			<Toolbar>
-				<Title text="Maintenance Operations"/>
-				<Button text="Add" press="onAddOperation"/>
-				<Button text="Copy" press="onBtnCpyRow"/>
-				<Button text="Save All" press="onSaveAll"/>
-				<Button text="Delete" press="onBtnDelRow"/>
-				<Button text="Refresh" press="onBtnRefresh"/>
-			</Toolbar>
-		</headerToolbar>
-		<columns>
-			<Column width="20em">
-				<Text text="Operation"/>
-			</Column>
-			<Column width="20em">
-				<Text text="Time Packages"/>
-			</Column>
-			<Column width = "20rem">
-				<Text text="Distance Packages"/>
-			</Column>
-			<Column width = "5rem">
-				<Text text="Status"/>
-			</Column>
-		</columns>
-		<items>
-			<ColumnListItem id="ColumnListItemId">
-				<cells>
-					<Input value="{Descr}" maxLength="{ path: '/#MaintenanceOperation/Descr/@maxLength', type:'sap.ui.model.type.String'}"
-						type="{path: '/#MaintenanceOperation/Descr/@type', formatter:'.formatter.edmTypeToSapUiType'}"/>
+        <headerToolbar>
+            <Toolbar>
+                <Button text="Add" press="onAddOperation" icon="sap-icon://add"/>
+                <Button text="Save All" press="onSaveAll" icon="sap-icon://save"/>
+                <Button text="Reset All Changes" press="onResetAllChanges" icon="sap-icon://reset"/>
+                <Button text="Delete" press="onBtnDelRow" icon="sap-icon://delete"/>
+                <Button text="Refresh" press="onRefresh" icon="sap-icon://refresh"/>
+                
+            </Toolbar>
+        </headerToolbar>
+        <columns>
+            <Column width="20em">
+                <Text text="Operation"/>
+            </Column>
+            <Column width="7em">
+                <Text text="Time Packages"/>
+            </Column>
+            <Column width = "7rem">
+                <Text text="Distance Packages"/>
+            </Column>
+            <Column width = "5rem">
+                <Text text="Flush"/>
+            </Column>
+            <Column width = "5rem">
+                <Text text="Last service Date"/>
+            </Column>
+            <Column width = "5rem">
+                <Text text="Last Service Mileage"/>
+            </Column>
+            <Column width = "5rem">
+                <Text text="Status"/>
+            </Column>
+        </columns>
+        <items>
+            <ColumnListItem id="ColumnListItemId">
+                <cells>
+                    <Input value="{Descr}" maxLength="{ path: '/#MaintenanceOperation/Descr/@maxLength', type:'sap.ui.model.type.String'}"
+                                               type="{path: '/#MaintenanceOperation/Descr/@type', formatter:'.formatter.edmTypeToSapUiType'}"/>
 					
-					<MultiInput id="timeMultiInputId" tokens="{ path: 'MaintenanceOperationTimePackageDetails', 
+                    <MultiInput id="timeMultiInputId" tokens="{ path: 'MaintenanceOperationTimePackageDetails', 
 															filters: [{ path: 'Strategy', operator: 'EQ', value1: 'TIME'}], 
 															templateShareable:false }" 
-						suggestionItems="{ path: '/StrategyPackages', 
+                                                    suggestionItems="{ path: '/StrategyPackages', 
 												filters: [{ path: 'Strategy', operator: 'EQ', value1: 'TIME'}], 
 												templateShareable:false }"
-						showValueHelp="false" tokenChange = "onTokenChange">
-						<suggestionItems>
-							<core:Item text="{StrategyPackage}" key="{StrategyPackage}"/>
-						</suggestionItems>
-						<tokens>
-							<Token key="{StrategyPackage}" text="{StrategyPackage}"/>
-						</tokens>
-					</MultiInput>
+                                                    showValueHelp="false" tokenChange = "onTokenChange">
+                        <suggestionItems>
+                            <core:Item text="{StrategyPackage}" key="{StrategyPackage}"/>
+                        </suggestionItems>
+                        <tokens>
+                            <Token key="{StrategyPackage}" text="{StrategyPackage}"/>
+                        </tokens>
+                    </MultiInput>
 					
-					<MultiInput id="distMultiInputId" tokens="{ path: 'MaintenanceOperationDistPackageDetails', 
+                    <MultiInput id="distMultiInputId" tokens="{ path: 'MaintenanceOperationDistPackageDetails', 
 															filters: [{ path: 'Strategy', operator: 'EQ', value1: 'DIST'}], 
 															templateShareable:false }" 
-						suggestionItems="{ path: '/StrategyPackages', 
+                                                    suggestionItems="{ path: '/StrategyPackages', 
 												filters: [{ path: 'Strategy', operator: 'EQ', value1: 'DIST'}], 
 												templateShareable:false }"
-						showValueHelp="false" tokenChange = "onTokenChange">
-						<suggestionItems>
-							<core:Item text="{StrategyPackage}" key="{StrategyPackage}"/>
-						</suggestionItems>
-						<tokens>
-							<Token key="{StrategyPackage}" text="{StrategyPackage}"/>
-						</tokens>
-					</MultiInput>
-					
-					<Label text="{path: 'UpdateFlag', formatter:'.formatter.updateFlagToString'}"/>
+                                                    showValueHelp="false" tokenChange = "onTokenChange">
+                        <suggestionItems>
+                            <core:Item text="{StrategyPackage}" key="{StrategyPackage}"/>
+                        </suggestionItems>
+                        <tokens>
+                            <Token key="{StrategyPackage}" text="{StrategyPackage}"/>
+                        </tokens>
+                    </MultiInput>
+                    <CheckBox selected='{FlushItem}'/>
+                    <Label text="{path:'LastServiceDate', 
+                                type:'sap.ui.model.type.Date', 
+                                formatOptions: { style: 'short' }}"/>
+                    <Label text="{LastServiceMileage}"/>
+                    <Label text="{path: 'UpdateFlag', formatter:'.formatter.updateFlagToString'}"/>
 						
-					<!--<MultiInput id="multiinputId" tokens="{ path: 'StrategyPackageDetails' }" suggestionItems="{ path: '/StrategyPackages' }"
-						showValueHelp="false" tokenChange = "onTokenChange">
-						<suggestionItems>
-							<core:Item text="{StrategyPackage}"/>
-						</suggestionItems>
-						<tokens>
-							<Token key="{StrategyPackage}" text="{StrategyPackage}"/>
-						</tokens>
-					</MultiInput>-->
+                    <!--<MultiInput id="multiinputId" tokens="{ path: 'StrategyPackageDetails' }" suggestionItems="{ path: '/StrategyPackages' }"
+                            showValueHelp="false" tokenChange = "onTokenChange">
+                            <suggestionItems>
+                                    <core:Item text="{StrategyPackage}"/>
+                            </suggestionItems>
+                            <tokens>
+                                    <Token key="{StrategyPackage}" text="{StrategyPackage}"/>
+                            </tokens>
+                    </MultiInput>-->
 					
-					<!--<MultiComboBox selectionChange="onSelectionChange" selectionFinish="onSelectionFinish"
-						items="{ path: '/StrategyPackages', sorter: { path: 'StrategyPackage' } }" 
-						selectedKeys="{ path: 'StrategyPackageDetails' }">
-						<core:Item key="{StrategyPackage}" text="{StrategyPackage}"/>
-					</MultiComboBox>-->
-				</cells>
-			</ColumnListItem>
-		</items>
-	</Table>
+                    <!--<MultiComboBox selectionChange="onSelectionChange" selectionFinish="onSelectionFinish"
+                            items="{ path: '/StrategyPackages', sorter: { path: 'StrategyPackage' } }" 
+                            selectedKeys="{ path: 'StrategyPackageDetails' }">
+                            <core:Item key="{StrategyPackage}" text="{StrategyPackage}"/>
+                    </MultiComboBox>-->
+                </cells>
+            </ColumnListItem>
+        </items>
+    </Table>
 </mvc:View>

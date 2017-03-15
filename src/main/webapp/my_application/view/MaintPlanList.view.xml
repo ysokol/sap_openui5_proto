@@ -1,51 +1,83 @@
 <mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns:core="sap.ui.core" xmlns:semantic="sap.m.semantic" xmlns="sap.m" controllerName="ys.first.app.controller.MaintPlanList">
     <!--, parameters: {expand: 'UomDimensionDetails'}  ,  
-                filters: [{ path: 'TenatId', operator: 'EQ', value1: '42'}] -->
-    <Table id="maintenancePlanTableId" inset="false" items="{path: '/MaintenancePlans' }" width="auto" growing="true">
+    filters: [{ path: 'TenatId', operator: 'EQ', value1: '42'}] -->
+    <App>
+        <pages>
+            <Page title="Maintenance Plans">
+                <content>
+                    <Table id="maintenancePlanTableId" inset="false"  mode = "MultiSelect" 
+                           items="{path: '/MaintenancePlans' }"
+                           width="auto" growing="true">
         
-        <headerToolbar>
-            <Toolbar>
-                <Title text="Maintenance Plans"/>
-                <Button id="addButton" text="Add" press="onAddRecord"/>
-                <Button id="newMaintDocm" text="New Maintenance Document" press="onNewMaintDoc"/>
-                <Button id="savButton" text="Save" press="onSaveAll"/>
-                <Button id="delButton" text="Delete" press="onBtnDelRow"/>
-                <Button id="refButton" text="Refresh" press="onBtnRefresh"/>
-            </Toolbar>
-        </headerToolbar>
+                        <headerToolbar>
+                            <Toolbar>
+                                <Button id="addButton" text="Add" press="onAddRecord" icon="sap-icon://add"/>
+                                <Button id="newMaintDocm" text="New Maintenance Document" press="onNewMaintDoc" icon="sap-icon://add-document"/>
+                                <Button id="savButton" text="Save" press="onSaveAll" icon="sap-icon://save"/>
+                                <Button id="resetButton" text="Reset All Changes" press="onResetAllChanges" icon="sap-icon://reset"/>
+                                <Button id="delButton" text="Delete" press="onBtnDelRow" icon="sap-icon://delete"/>
+                                <Button id="refButton" text="Refresh" press="onRefresh" icon="sap-icon://refresh"/>
+                            </Toolbar>
+                        </headerToolbar>
               
-        <columns>
-            <Column width="5em">
-                <Text text="Maintenance Plan"/>
-            </Column>
-            <Column width="15em">
-                <Text text="Description"/>
-            </Column>
-            <Column width="20em">
-                <Text text="Comment"/>
-            </Column>
-            <Column width="8em">
-                <Text text="Schedule"/>
-            </Column>
-            <Column width="5em">
-                <Text text="Status"/>
-            </Column>
-        </columns>
+                        <columns>
+                            <Column width="5em">
+                                <Text text="Maintenance Plan"/>
+                            </Column>
+                            <Column width="15em">
+                                <Text text="Description"/>
+                            </Column>
+                            <Column width="8em">
+                                <Text text="Mileage per Year"/>
+                            </Column>
+                            <Column width="5em">
+                                <Text text="Production Date"/>
+                            </Column>
+                            <Column width="5em">
+                                <Text text="Current Mileage"/>
+                            </Column>
+                            <Column width="8em">
+                                <Text text="Actions"/>
+                            </Column>
+                            <Column width="5em">
+                                <Text text="Status"/>
+                            </Column>
+                        </columns>
         
-        <items>
-            <ColumnListItem vAlign="Middle" id="ColumnListItemId" type="Detail" detailPress="onNavigation">
-                <cells>
-                    <Label text="{MaintenancePlan}"/>
-                    <Input value="{Descr}"
-                    	maxLength="{ path: '/#MaintenancePlan/Descr/@maxLength', type:'sap.ui.model.type.String'}" 
-                    	type="{path: '/#MaintenancePlan/Descr/@type', formatter:'.formatter.edmTypeToSapUiType'}"/>
-                    <Input value="{Comment}"
-                    	maxLength="{ path: '/#MaintenancePlan/Comment/@maxLength', type:'sap.ui.model.type.String'}" 
-                    	type="{path: '/#MaintenancePlan/Comment/@type', formatter:'.formatter.edmTypeToSapUiType'}"/>
-                	<Button id="viewScheduleBtnId" text="View Schedule" press="onViewSchedule"/>
-                	<Label text="{path: 'UpdateFlag', formatter:'.formatter.updateFlagToString'}"/>
-                </cells>
-            </ColumnListItem>
-        </items>   
-    </Table>
+                        <items>
+                            <ColumnListItem vAlign="Middle" id="ColumnListItemId" type="Detail" detailPress="onNavigation">
+                                <cells>
+                                    <Label text="{MaintenancePlan}"/>
+                                    <Input value="{Descr}"
+                                           maxLength="{ path: '/#MaintenancePlan/Descr/@maxLength', type:'sap.ui.model.type.String'}" 
+                                           type="{path: '/#MaintenancePlan/Descr/@type', formatter:'.formatter.edmTypeToSapUiType'}"/>
+                                    <Input value="{MileagePerYear}"
+                                           type="{path: '/#MaintenancePlan/MileagePerYear/@type', formatter:'.formatter.edmTypeToSapUiType'}"/>
+                                    <DatePicker value="{path:'ProductionDate', 
+                                type:'sap.ui.model.type.Date', 
+                                formatOptions: { style: 'short', strictParsing: true}}"/>
+                                    <Label text="{CurrentMileage}"/>
+                                    <!--<Input value="{Comment}"
+                                    maxLength="{ path: '/#MaintenancePlan/Comment/@maxLength', type:'sap.ui.model.type.String'}" 
+                                    type="{path: '/#MaintenancePlan/Comment/@type', formatter:'.formatter.edmTypeToSapUiType'}"/>-->
+                                    <!--<Button id="viewScheduleBtnId" text="View Schedule" press="onViewSchedule"/>-->
+                                    <MenuButton text="Actions">
+                                        <menu>
+                                            <Menu itemSelected="onMenuAction">
+                                                <items>
+                                                    <MenuItem text="Edit Plan" key="keyEditPlan" icon="sap-icon://edit"/>
+                                                    <MenuItem text="View Schedule"  key="keyViewSchedule" icon="sap-icon://display"/>
+                                                </items>
+                                            </Menu>
+                                        </menu>
+                                    </MenuButton>
+                                    <Label text="{path: 'UpdateFlag', formatter:'.formatter.updateFlagToString'}"/>
+                                </cells>
+                            </ColumnListItem>
+                        </items>   
+                    </Table>
+                </content>
+            </Page>
+        </pages>
+    </App>
 </mvc:View>

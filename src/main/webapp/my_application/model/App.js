@@ -18,8 +18,63 @@ sap.ui.define([
             });
 
             this.attachRequestFailed(function (oEvent) {
-                jQuery.sap.require("sap.m.MessageBox");
-                sap.m.MessageBox.error(oEvent.getParameters().response.responseText);
+                var oServerError = JSON.parse(oEvent.getParameters().response.responseText);
+                var oServerDetailError = JSON.parse(oServerError.error.innererror);
+                //oServerError.error.code
+                //oServerError.error.innererror.detailMessage
+                //oServerError.error.innererror.cause
+                
+                var cause = oServerDetailError
+                var detailedContent = new Array(1);
+                while (cause) {
+                    detailedContent.push( new sap.m.Label({text: "Caused By:", design: sap.m.LabelDesign.Bold}) );
+                    detailedContent.push( new sap.m.Text({text: cause.detailMessage}) );
+                    cause = cause.cause;
+                }
+                
+                var dialog = new sap.m.Dialog({
+                    title: 'Error',
+                    type: 'Message',
+                    state: 'Error',
+                    content: new sap.m.Text({
+                        text: oServerError.error.message.value
+                    }),
+                    beginButton: new sap.m.Button({
+                        text: 'Additonal Details',
+                        press: function () {
+                            dialog.close();
+                            var innerDialog = new sap.m.Dialog({
+                                title: 'Error Details',
+                                type: 'Message',
+                                state: 'Error',
+                                content: detailedContent,
+                                beginButton: new sap.m.Button({
+                                    text: 'OK',
+                                    press: function () {
+                                        innerDialog.close();
+
+                                    }
+                                }),
+                                afterClose: function () {
+                                    innerDialog.destroy();
+                                }
+                            });
+                            innerDialog.open();
+                        }
+                    }),
+                    endButton: new sap.m.Button({
+                        text: 'Close',
+                        press: function () {
+                            dialog.close();
+                        }
+                    }),
+                    afterClose: function () {
+                        dialog.destroy();
+                    }
+                });
+                
+                dialog.open();
+
             });
 
             this.attachPropertyChange(this.onOropertyChange, this);
